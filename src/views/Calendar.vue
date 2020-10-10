@@ -1,4 +1,9 @@
 <template>
+  <div id="modalParentDiv">
+    <div v-if="showModal" id="modal">Modal</div>
+  </div>
+
+<br />
   <div id="calendar"></div>
 </template>
 
@@ -21,8 +26,19 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 export default {
   name: "Calendar",
+  data() {
+    return {
+      showModal: false
+    };
+  },
+  methods: {
+    toggleMeetingModal() {
+      this.showModal = !this.showModal;
+    }
+  },
   mounted() {
     // https://vuejs.org/v2/api/#mounted
+    const toggleMeetingModal = this.toggleMeetingModal;
     this.$nextTick(function() {
       console.log("mounted");
       const calendarEl = document.getElementById("calendar");
@@ -73,6 +89,7 @@ export default {
             )}${minuteTime}`;
 
             console.log(`${startDate} - ${endDate}`);
+            toggleMeetingModal();
           }
         }
       });
@@ -82,3 +99,15 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+#modalParentDiv {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+#modal {
+  position: absolute;
+  z-index: 1;
+}
+</style>
