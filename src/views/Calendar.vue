@@ -1,7 +1,4 @@
 <template>
-  <div>
-    <h2>{{ titleDate }}</h2>
-  </div>
   <div id="calendar"></div>
 
   <transition v-if="showModal" name="modal">
@@ -80,8 +77,7 @@ export default {
           start: "2020-10-08T22:00",
           end: "2020-10-08T23:00"
         }
-      ],
-      titleDate: null,
+      ]
     };
   },
   computed: {
@@ -141,7 +137,6 @@ export default {
     const toggleMeetingModal = this.toggleMeetingModal;
     const setDateMeeting = this.setDateMeeting;
     const setCalendar = this.setCalendar;
-    const setTitleDate = this.setTitleDate;
 
     this.$nextTick(function() {
       console.log("mounted");
@@ -155,7 +150,7 @@ export default {
         // Custom header buttons https://fullcalendar.io/docs/customButtons
         headerToolbar: {
           left: "dayGridMonth,timeGridWeek,timeGridDay",
-          // center: "title", // MAKE MY OWN TITLE !!!!!!!!!!!!
+          center: "title", // MAKE MY OWN TITLE !!!!!!!!!!!!
           right: "today prev,next"
         },
         businessHours: {
@@ -195,13 +190,6 @@ export default {
       });
       setCalendar(calendar);
       calendar.render();
-
-      const options = {
-        year: "numeric",
-        month:"long"
-      };
-
-      setTitleDate(new Date().toLocaleDateString("en-US", options));
     });
   }
 };
@@ -268,7 +256,7 @@ export default {
 }
 
 .modal-default-button {
-  /* float: right; */
+  /*  */
 }
 
 /*
@@ -292,5 +280,11 @@ export default {
 .modal-leave-active .modal-container {
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+@media only screen and (max-width: 600px) {
+  #calendar {
+    font-size: 10px !important;
+  }
 }
 </style>
