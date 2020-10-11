@@ -1,10 +1,47 @@
 <template>
-  <div id="modalParentDiv">
-    <div v-if="showModal" id="modal">Modal</div>
+  <div>
+    <h2>{{ titleDate }}</h2>
   </div>
-
-<br />
   <div id="calendar"></div>
+
+  <transition v-if="showModal" name="modal">
+    <div class="modal-mask">
+      <div class="modal-wrapper">
+        <div class="modal-container">
+          <div class="modal-header">
+            <slot name="header">
+              <h3>Set Appointment</h3>
+            </slot>
+          </div>
+
+          <div class="modal-body">
+            <slot name="body">
+              <div>
+                <span>Are you sure you want to set an appointment on:</span>
+                <div>
+                  <span class="emp">{{ dateFormatter }}</span>
+                </div>
+                <div>
+                  <span class="emp">{{ timeFormatter }}</span>
+                </div>
+              </div>
+            </slot>
+          </div>
+
+          <div class="modal-footer">
+            <slot name="footer">
+              <Button content="Save" color="teal" @onclick="saveAppointment" />
+              <Button
+                content="Cancel"
+                color="basic"
+                @onclick="toggleMeetingModal"
+              />
+            </slot>
+          </div>
+        </div>
+      </div>
+    </div>
+  </transition>
 </template>
 
 <script>
@@ -14,11 +51,14 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import interactionPlugin from "@fullcalendar/interaction";
+
+import Button from "@/components/Button.vue";
+
 /**
  * -- CREATE FAKE DATA FOR EVENTS --
  * Load based on month if on calendar
- * Load week if weekly
- * Load daily if daily View
+ * Load based on month if weekly
+ * Load based on month if daily View
  *
  * -- Create Modal When Week/Day clicked --
  * -- Barber vs Client View --
@@ -26,19 +66,83 @@ import interactionPlugin from "@fullcalendar/interaction";
 
 export default {
   name: "Calendar",
+  components: {
+    Button
+  },
   data() {
     return {
-      showModal: false
+      calendar: null,
+      showModal: false,
+      dateMeeting: "",
+      events: [
+        {
+          // title: "FirstName", // if barber show firstName
+          start: "2020-10-08T22:00",
+          end: "2020-10-08T23:00"
+        }
+      ],
+      titleDate: null,
     };
+  },
+  computed: {
+    dateFormatter() {
+      const options = {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric"
+      };
+
+      return new Date(this.dateMeeting.split(" - ")[0]).toLocaleDateString(
+        "en-US",
+        options
+      );
+    },
+    timeFormatter() {
+      const options = {
+        hour12: true,
+        hour: "numeric",
+        minute: "numeric",
+        seconds: "numeric"
+      };
+      return new Date(this.dateMeeting.split(" - ")[0]).toLocaleTimeString(
+        "en-US",
+        options
+      );
+    }
   },
   methods: {
     toggleMeetingModal() {
       this.showModal = !this.showModal;
+    },
+    setCalendar(calendar) {
+      this.calendar = calendar;
+    },
+    setDateMeeting(dateMeeting) {
+      this.dateMeeting = dateMeeting;
+    },
+    saveAppointment() {
+      const newEvent = {
+        title: "Ever",
+        start: this.dateMeeting.split(" - ")[0],
+        end: this.dateMeeting.split(" - ")[1]
+      };
+      // this.events.push(newEvent)
+      this.calendar.addEvent(newEvent);
+      this.toggleMeetingModal();
+    },
+    setTitleDate(titleDate) {
+      this.titleDate = titleDate;
     }
   },
   mounted() {
     // https://vuejs.org/v2/api/#mounted
+    const events = this.events;
     const toggleMeetingModal = this.toggleMeetingModal;
+    const setDateMeeting = this.setDateMeeting;
+    const setCalendar = this.setCalendar;
+    const setTitleDate = this.setTitleDate;
+
     this.$nextTick(function() {
       console.log("mounted");
       const calendarEl = document.getElementById("calendar");
@@ -48,23 +152,18 @@ export default {
         nowIndicator: true,
         allDaySlot: false,
         height: "auto",
+        // Custom header buttons https://fullcalendar.io/docs/customButtons
         headerToolbar: {
           left: "dayGridMonth,timeGridWeek,timeGridDay",
-          center: "title",
-          right: "prev,next"
+          // center: "title", // MAKE MY OWN TITLE !!!!!!!!!!!!
+          right: "today prev,next"
         },
         businessHours: {
           daysOfWeek: [0, 1, 2, 3, 4, 5, 6],
           startTime: "05:00",
           endTime: "23:00"
         },
-        events: [
-          {
-            // title: "FirstName", // if barber show firstName
-            start: "2020-10-08T22:00",
-            end: "2020-10-08T23:00"
-          }
-        ],
+        events,
         dateClick(info) {
           if (info.view.type === "dayGridMonth")
             calendar.changeView("timeGridDay", info.dateStr);
@@ -90,24 +189,108 @@ export default {
 
             console.log(`${startDate} - ${endDate}`);
             toggleMeetingModal();
+            setDateMeeting(`${startDate} - ${endDate}`);
           }
         }
       });
-
+      setCalendar(calendar);
       calendar.render();
+
+      const options = {
+        year: "numeric",
+        month:"long"
+      };
+
+      setTitleDate(new Date().toLocaleDateString("en-US", options));
     });
   }
 };
 </script>
 
 <style scoped>
-#modalParentDiv {
-  position: relative;
+.emp {
+  font-weight: bold;
+  color: #42b983;
+}
+
+.modal-mask {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
+}
+
+.modal-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.modal-container {
+  height: 150px;
+  /* width: 300px; */
+  width: 50%;
+  border-radius: 30px;
+  margin: 0px auto;
+  padding: 20px 30px;
+  background-color: #fff;
+  border-radius: 5px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
+  transition: all 0.3s ease;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.modal-header {
+  height: 15%;
+}
+
+.modal-header h3 {
+  margin-top: 0;
+  color: #42b983;
+}
+
+.modal-body {
+  height: 70%;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
-#modal {
-  position: absolute;
-  z-index: 1;
+
+.modal-footer {
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-default-button {
+  /* float: right; */
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
+  opacity: 0;
+}
+
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 </style>
