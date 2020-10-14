@@ -71,13 +71,7 @@ export default {
       calendar: null,
       showModal: false,
       dateMeeting: "",
-      events: [
-        {
-          // title: "FirstName", // if barber show firstName
-          start: "2020-10-08T22:00",
-          end: "2020-10-08T23:00"
-        }
-      ]
+      events: this.$store.state.events
     };
   },
   computed: {
@@ -111,9 +105,6 @@ export default {
     toggleMeetingModal() {
       this.showModal = !this.showModal;
     },
-    setCalendar(calendar) {
-      this.calendar = calendar;
-    },
     setDateMeeting(dateMeeting) {
       this.dateMeeting = dateMeeting;
     },
@@ -123,8 +114,9 @@ export default {
         start: this.dateMeeting.split(" - ")[0],
         end: this.dateMeeting.split(" - ")[1]
       };
-      // this.events.push(newEvent)
-      this.calendar.addEvent(newEvent);
+      this.$store.commit("addEvent", {
+        newEvent
+      });
       this.toggleMeetingModal();
     },
     setTitleDate(titleDate) {
@@ -136,7 +128,8 @@ export default {
     const events = this.events;
     const toggleMeetingModal = this.toggleMeetingModal;
     const setDateMeeting = this.setDateMeeting;
-    const setCalendar = this.setCalendar;
+    const commit = this.$store.commit;
+    const eventsLoaded = this.$store.state.eventsLoaded;
 
     this.$nextTick(function() {
       console.log("mounted");
@@ -150,7 +143,7 @@ export default {
         // Custom header buttons https://fullcalendar.io/docs/customButtons
         headerToolbar: {
           left: "dayGridMonth,timeGridWeek,timeGridDay",
-          center: "title", // MAKE MY OWN TITLE !!!!!!!!!!!!
+          center: "title",
           right: "today prev,next"
         },
         businessHours: {
@@ -188,7 +181,12 @@ export default {
           }
         }
       });
-      setCalendar(calendar);
+
+      commit("setCalendar", { calendar });
+      if (!eventsLoaded) {
+        commit("setEventsLoading", { eventsLoaded: true });
+        commit("initEvents");
+      }
       calendar.render();
     });
   }
