@@ -1,219 +1,126 @@
 <template>
-  <div class="form">
-    <ul class="tab-group">
-      <li class="tab active"><a href="/register">Sign Up</a></li>
-      <li class="tab"><a href="/login">Log In</a></li>
-    </ul>
+  <div id="container">
+    <div id="inner">
+      <h2 id="title">Roberto Barbering</h2>
+      <h3>Login</h3>
+      <div id="message">
+        New to us?
+        <router-link to="/register">Register</router-link>
+      </div>
 
-    <div class="tab-content">
-      <div id="login">
-        <h1>Welcome Back!</h1>
-
-        <form action="/" method="post">
-          <div class="field-wrap">
-            <!-- only show when no data is in input -->
-            <label> Email Address<span class="req">*</span> </label> 
-            <input type="email" placeholder="" required autocomplete="off" />
-          </div>
-
-          <div class="field-wrap">
-            <label> Password<span class="req">*</span> </label>
-            <input type="password" required autocomplete="off" />
-          </div>
-
-          <p class="forgot"><a href="#">Forgot Password?</a></p>
-
-          <button class="button button-block">Log In</button>
-        </form>
+      <div id="form">
+        <div id="email">
+          <input placeholder="E-mail address" />
+        </div>
+        <div id="password">
+          <input placeholder="Password" />
+        </div>
+        <div id="login-div">
+          <button id="login-button" @click="$router.push('calendar')">
+            Login
+          </button>
+        </div>
       </div>
     </div>
-    <!-- tab-content -->
   </div>
-  <!-- /form -->
 </template>
 
 <style scoped>
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
+#container {
+  height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-html {
-  overflow-y: scroll;
+#inner {
+  width: 100%;
+  max-width: 450px;
 }
 
-body {
-  background: #c1bdba;
-  font-family: "Titillium Web", sans-serif;
-}
-
-a {
-  text-decoration: none;
-  color: #1ab188;
-  -webkit-transition: 0.5s ease;
-  transition: 0.5s ease;
-}
-a:hover {
-  color: #179b77;
-}
-
-.form {
-  background: rgba(19, 35, 47, 0.9);
-  padding: 40px;
-  max-width: 600px;
-  margin: 40px auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
-}
-
-.tab-group {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 40px 0;
-}
-.tab-group:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.tab-group li a {
-  display: block;
-  text-decoration: none;
-  padding: 15px;
-  background: rgba(160, 179, 176, 0.25);
-  color: #a0b3b0;
-  font-size: 20px;
-  float: left;
-  width: 50%;
-  text-align: center;
-  cursor: pointer;
-  -webkit-transition: 0.5s ease;
-  transition: 0.5s ease;
-}
-.tab-group li a:hover {
-  background: #179b77;
-  color: #ffffff;
-}
-.tab-group .active a {
-  background: #1ab188;
-  color: #ffffff;
-}
-
-.tab-content > div:last-child {
-  /* display: none; */
-}
-
-h1 {
-  text-align: center;
-  color: #ffffff;
-  font-weight: 300;
-  margin: 0 0 40px;
-}
-
-label {
-  position: absolute;
-  -webkit-transform: translateY(6px);
-  transform: translateY(6px);
-  left: 13px;
-  color: rgba(255, 255, 255, 0.5);
-  -webkit-transition: all 0.25s ease;
-  transition: all 0.25s ease;
-  -webkit-backface-visibility: hidden;
-  pointer-events: none;
-  font-size: 22px;
-}
-label .req {
-  margin: 2px;
-  color: #1ab188;
-}
-
-label.active {
-  -webkit-transform: translateY(50px);
-  transform: translateY(50px);
-  left: 2px;
+#message {
   font-size: 14px;
-}
-label.active .req {
-  opacity: 0;
-}
-
-label.highlight {
-  color: #ffffff;
-}
-
-input,
-textarea {
-  font-size: 22px;
-  display: block;
-  width: 100%;
-  height: 100%;
-  padding: 5px 10px;
-  background: none;
-  background-image: none;
-  border: 1px solid #a0b3b0;
-  color: #ffffff;
-  border-radius: 0;
-  -webkit-transition: border-color 0.25s ease, box-shadow 0.25s ease;
-  transition: border-color 0.25s ease, box-shadow 0.25s ease;
-}
-input:focus,
-textarea:focus {
-  outline: 0;
-  border-color: #1ab188;
-}
-
-textarea {
-  border: 2px solid #a0b3b0;
-  resize: vertical;
-}
-
-.field-wrap {
   position: relative;
-  margin-bottom: 40px;
+  min-height: 1em;
+  margin: 1em 0;
+  background: #f8f8f9;
+  padding: 1em 1.5em;
+  line-height: 1.4285em;
+  color: rgba(0, 0, 0, 0.87);
+  transition: opacity 0.1s ease, color 0.1s ease, background 0.1s ease,
+    box-shadow 0.1s ease;
+  border-radius: 0.28571429rem;
+  box-shadow: inset 0 0 0 1px rgba(34, 36, 38, 0.22), 0 0 0 0 transparent;
 }
 
-.top-row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-.top-row > div {
-  float: left;
-  width: 48%;
-  margin-right: 4%;
-}
-.top-row > div:last-child {
-  margin: 0;
+#form {
+  /* position: relative; */
+  background: #fff;
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
+  margin: 1rem 0;
+  padding: 16px;
+  border-radius: 0.28571429rem;
+  border: 1px solid rgba(34, 36, 38, 0.15);
 }
 
-.button {
-  border: 0;
-  outline: none;
-  border-radius: 0;
-  padding: 15px 0;
-  font-size: 2rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  background: #1ab188;
-  color: #ffffff;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
-  -webkit-appearance: none;
-}
-.button:hover,
-.button:focus {
-  background: #179b77;
-}
-
-.button-block {
-  display: block;
+#login-button {
+  font-size: 16px;
+  background-color: #767676 !important;
+  color: #fff !important;
+  text-shadow: none;
+  background-image: none;
   width: 100%;
+  cursor: pointer;
+  display: inline-block;
+  min-height: 1em;
+  outline: 0;
+  border: none;
+  vertical-align: baseline;
+  background: #e0e1e2 none;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 0.78571429em 1.5em;
+  text-transform: none;
+  text-shadow: none;
+  font-weight: 700;
+  line-height: 1em;
+  font-style: normal;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 0.28571429rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease,
+    box-shadow 0.1s ease, background 0.1s ease;
+  will-change: "";
+  -webkit-tap-highlight-color: transparent;
 }
 
-.forgot {
-  margin-top: -20px;
-  text-align: right;
+#login-button:hover {
+  background-color: #838383;
+  color: #fff;
+  text-shadow: none;
+}
+
+#email,
+#password,
+#login-div {
+  padding: 10px 0;
+}
+
+input {
+  font-size: 16px;
+  width: 95%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  background: #fff;
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 0.28571429rem;
+  box-shadow: inset 0 0 0 0 transparent;
 }
 </style>
