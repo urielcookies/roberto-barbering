@@ -3,6 +3,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 import Register from "../views/Register.vue";
 import Calendar from "../views/Calendar.vue";
+import UserHome from "../views/UserHome.vue";
 
 const routes = [
   {
@@ -23,6 +24,11 @@ const routes = [
     path: "/login",
     name: "Login",
     component: Login
+  },
+  {
+    path: "/home",
+    name: "UserHome",
+    component: UserHome
   },
   {
     path: "/register",

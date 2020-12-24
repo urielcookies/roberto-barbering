@@ -6,11 +6,22 @@
     <router-link to="/register">Register</router-link> |
     <router-link to="/calendar">Calendar</router-link>
   </div> -->
+  <Navbar />
   <router-view />
 </template>
 
+<script>
+import Navbar from "@/components/Navbar.vue";
+
+export default {
+  components: {
+    Navbar
+  }
+};
+</script>
+
 <style>
-#app {
+/* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -29,5 +40,5 @@
 
 #nav a.router-link-exact-active {
   color: #42b983;
-}
+} */
 </style>

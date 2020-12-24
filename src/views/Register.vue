@@ -47,20 +47,21 @@
   background: #f8f8f9;
   padding: 1em 1.5em;
   line-height: 1.4285em;
-  color: rgba(0,0,0,.87);
-  transition: opacity .1s ease,color .1s ease,background .1s ease,box-shadow .1s ease;
-  border-radius: .28571429rem;
-  box-shadow: inset 0 0 0 1px rgba(34,36,38,.22), 0 0 0 0 transparent;
+  color: rgba(0, 0, 0, 0.87);
+  transition: opacity 0.1s ease, color 0.1s ease, background 0.1s ease,
+    box-shadow 0.1s ease;
+  border-radius: 0.28571429rem;
+  box-shadow: inset 0 0 0 1px rgba(34, 36, 38, 0.22), 0 0 0 0 transparent;
 }
 
 #form {
   /* position: relative; */
   background: #fff;
-  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
+  box-shadow: 0 1px 2px 0 rgba(34, 36, 38, 0.15);
   margin: 1rem 0;
   padding: 16px;
-  border-radius: .28571429rem;
-  border: 1px solid rgba(34,36,38,.15);
+  border-radius: 0.28571429rem;
+  border: 1px solid rgba(34, 36, 38, 0.15);
 }
 
 #register-button {
@@ -77,9 +78,9 @@
   border: none;
   vertical-align: baseline;
   background: #e0e1e2 none;
-  color: rgba(0,0,0,.6);
-  font-family: Lato,"Helvetica Neue",Arial,Helvetica,sans-serif;
-  padding: .78571429em 1.5em;
+  color: rgba(0, 0, 0, 0.6);
+  font-family: Lato, "Helvetica Neue", Arial, Helvetica, sans-serif;
+  padding: 0.78571429em 1.5em;
   text-transform: none;
   text-shadow: none;
   font-weight: 700;
@@ -87,12 +88,13 @@
   font-style: normal;
   text-align: center;
   text-decoration: none;
-  border-radius: .28571429rem;
+  border-radius: 0.28571429rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  transition: opacity .1s ease,background-color .1s ease,color .1s ease,box-shadow .1s ease,background .1s ease;
+  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease,
+    box-shadow 0.1s ease, background 0.1s ease;
   will-change: "";
   -webkit-tap-highlight-color: transparent;
 }
@@ -118,9 +120,9 @@ input {
   padding-left: 2.5%;
   padding-right: 2.5%;
   background: #fff;
-  border: 1px solid rgba(34,36,38,.15);
-  color: rgba(0,0,0,.87);
-  border-radius: .28571429rem;
-  box-shadow: inset 0 0 0 0 transparent
+  border: 1px solid rgba(34, 36, 38, 0.15);
+  color: rgba(0, 0, 0, 0.87);
+  border-radius: 0.28571429rem;
+  box-shadow: inset 0 0 0 0 transparent;
 }
 </style>
