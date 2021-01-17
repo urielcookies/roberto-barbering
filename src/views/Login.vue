@@ -30,19 +30,16 @@
             </div></router-link
           >
 
-                <router-link to="/"
-        ><div class="ui fluid large grey submit button">
-          Go back
-        </div></router-link
-      >
-      <div class="ui message">New to us? <a href="#">Sign Up</a></div>
-      
+          <router-link to="/"
+            ><div class="ui fluid large grey submit button">
+              Go back
+            </div></router-link
+          >
+          <div class="ui message">New to us? <a href="#">Sign Up</a></div>
         </div>
 
         <div class="ui error message"></div>
       </form>
-
-
     </div>
   </div>
 </template>
