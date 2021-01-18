@@ -1,27 +1,53 @@
 <template>
-  <div id="container">
-    <div id="inner">
-      <h2 id="title">Roberto Barbering</h2>
-      <h3>Register</h3>
-      <div id="message">
-        Have an account?
-        <router-link to="/login">Log in</router-link>
-      </div>
+  <div class="ui middle aligned center aligned" style="height: 90vh">
+    <br />
+    <div class="column" style="display: flex; justify-content: center">
+      <form class="ui large form" style="width: 450px">
+        <div style="display: flex; justify-content: center">
+          <h2 class="ui header">
+            <i class="user plus icon" style="font-size: 20px;"></i>
+            <div class="content">
+              Register
+            </div>
+          </h2>
+        </div>
 
-      <div id="form">
-        <div id="email">
-          <input placeholder="E-mail address" />
+        <div class="ui stacked segment">
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="user icon"></i>
+              <input type="text" name="email" placeholder="E-mail address" />
+            </div>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="lock icon"></i>
+              <input type="password" name="password" placeholder="Password" />
+            </div>
+          </div>
+          <router-link to="/home">
+            <div
+              class="ui fluid large grey submit button"
+              style="margin-bottom: 5px"
+            >
+              Register
+            </div>
+          </router-link>
+          <router-link to="/">
+            <div class="ui fluid large basic submit button">
+              Go back
+            </div>
+          </router-link>
+          <div class="ui message">
+            Have an account?
+            <router-link to="/login">
+              Login
+            </router-link>
+          </div>
         </div>
-        <div id="password">
-          <input placeholder="Password" />
-        </div>
-        <div id="confirm-password">
-          <input placeholder="Confirm Password" />
-        </div>
-        <div id="register-div">
-          <button id="register-button">Register</button>
-        </div>
-      </div>
+
+        <div class="ui error message"></div>
+      </form>
     </div>
   </div>
 </template>

@@ -1,16 +1,17 @@
 <template>
-  <div class="ui middle aligned center aligned">
-    <div class="column">
-      <h2 class="ui teal image header">
-        <img
-          src="https://semantic-ui.com/examples/assets/images/logo.png"
-          class="image"
-        />
-        <div class="content">
-          Log-in to your account
+  <div class="ui middle aligned center aligned" style="height: 90vh">
+    <br />
+    <div class="column" style="display: flex; justify-content: center">
+      <form class="ui large form" style="width: 450px">
+        <div style="display: flex; justify-content: center">
+          <h2 class="ui header">
+            <i class="user icon" style="font-size: 20px;"></i>
+            <div class="content">
+              Login
+            </div>
+          </h2>
         </div>
-      </h2>
-      <form class="ui large form">
+
         <div class="ui stacked segment">
           <div class="field">
             <div class="ui left icon input">
@@ -24,18 +25,25 @@
               <input type="password" name="password" placeholder="Password" />
             </div>
           </div>
-          <router-link to="/home"
-            ><div class="ui fluid large teal submit button">
+          <router-link to="/home">
+            <div
+              class="ui fluid large grey submit button"
+              style="margin-bottom: 5px"
+            >
               Log in
-            </div></router-link
-          >
-
-          <router-link to="/"
-            ><div class="ui fluid large grey submit button">
+            </div>
+          </router-link>
+          <router-link to="/">
+            <div class="ui fluid large basic submit button">
               Go back
-            </div></router-link
-          >
-          <div class="ui message">New to us? <a href="#">Sign Up</a></div>
+            </div>
+          </router-link>
+          <div class="ui message">
+            New to us?
+            <router-link to="/register">
+              Sign Up
+            </router-link>
+          </div>
         </div>
 
         <div class="ui error message"></div>

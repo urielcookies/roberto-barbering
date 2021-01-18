@@ -219,7 +219,7 @@ export default {
 .modal-container {
   height: 150px;
   /* width: 300px; */
-  width: 50%;
+  /* width: 50%; */
   border-radius: 30px;
   margin: 0px auto;
   padding: 20px 30px;
