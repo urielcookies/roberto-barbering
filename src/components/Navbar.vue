@@ -5,12 +5,26 @@
       style="display: flex; align-items: center"
     >
       <div>
-        <router-link class="item" :class="{ active: active === 'Home' }" to="/">
+        <router-link
+          class="item"
+          :class="{ active: active === 'Calendar' }"
+          :to="isAuthenticatedRoute"
+        >
           Home
         </router-link>
         <!-- If login then home for client -->
       </div>
-      <div class="right item">
+      <div class="right item" v-if="authCheck">
+        <router-link
+          v-on:click="logout"
+          class="item"
+          :class="{ active: active === 'Login' }"
+          to="/"
+          >Log out</router-link
+        >
+      </div>
+
+      <div class="right item" v-if="!authCheck">
         <router-link
           class="item"
           :class="{ active: active === 'Login' }"
@@ -34,12 +48,30 @@ export default {
   name: "Navbar",
   data() {
     return {
-      active: "Home"
+      active: "Home",
+      isAuthenticated: this.$store.state.isAuthenticated,
+      isAuthenticatedRoute: this.$store.state.isAuthenticated
+        ? "/calendar"
+        : "/"
     };
+  },
+  methods: {
+    logout() {
+      this.$store.commit("setAuthentication", {
+        isAuthenticated: false
+      });
+    }
+  },
+  computed: {
+    authCheck() {
+      return this.$store.state.isAuthenticated;
+    }
   },
   watch: {
     $route({ name }) {
       this.active = name;
+      if (this.active === "Calendar" && !this.$store.state.isAuthenticated)
+        this.$router.push("/");
     }
   }
 };

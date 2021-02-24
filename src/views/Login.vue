@@ -25,14 +25,15 @@
               <input type="password" name="password" placeholder="Password" />
             </div>
           </div>
-          <router-link to="/home">
-            <div
-              class="ui fluid large grey submit button"
-              style="margin-bottom: 5px"
-            >
-              Log in
-            </div>
-          </router-link>
+          <!-- <router-link to="/calendar"> -->
+          <div
+            class="ui fluid large grey submit button"
+            style="margin-bottom: 5px"
+            v-on:click="login"
+          >
+            Log in
+          </div>
+          <!-- </router-link> -->
           <router-link to="/">
             <div class="ui fluid large basic submit button">
               Go back
@@ -51,6 +52,27 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: "Login",
+  data() {
+    return {
+      active: "Home",
+      isAuthenticated: this.$store.state.isAuthenticated ? "/calendar" : "/"
+    };
+  },
+  methods: {
+    login() {
+      this.$router.push("/calendar");
+      this.$store.commit("setAuthentication", {
+        isAuthenticated: true
+      });
+    }
+  }
+};
+</script>
+
 <style type="text/css" scoped>
 body {
   background-color: #dadada;

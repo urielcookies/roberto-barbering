@@ -7,7 +7,7 @@
     <router-link to="/calendar">Calendar</router-link>
   </div> -->
   <Navbar />
-  <div>
+  <div style="min-height: 70vh">
     <router-view />
   </div>
   <Footer />

@@ -8,7 +8,8 @@ const store = createStore({
     return {
       calendar: null,
       events: [],
-      eventsLoaded: false
+      eventsLoaded: false,
+      isAuthenticated: false
     };
   },
   mutations: {
@@ -35,6 +36,9 @@ const store = createStore({
     },
     setEventsLoading(state, { eventsLoaded }) {
       state.eventsLoaded = eventsLoaded;
+    },
+    setAuthentication(state, { isAuthenticated }) {
+      state.isAuthenticated = isAuthenticated;
     }
   }
 });
